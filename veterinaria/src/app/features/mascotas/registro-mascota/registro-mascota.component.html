@@ -1,0 +1,126 @@
+<section class="d-grid gap-4">
+  <header>
+    <h2 class="h4 fw-bold mb-1">Registro de mascotas y duenos</h2>
+    <p class="text-muted mb-0">
+      Registra nuevos pacientes con sus datos de contacto para evitar perdida de informacion.
+    </p>
+  </header>
+
+  <article class="card shadow-sm border-0">
+    <div class="card-body">
+      <form [formGroup]="mascotaForm" (ngSubmit)="registrarMascota()" novalidate>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label for="nombreMascota" class="form-label">Nombre de la mascota</label>
+            <input id="nombreMascota" class="form-control" formControlName="nombre" />
+            <small class="text-danger" *ngIf="mascotaForm.controls.nombre.touched && mascotaForm.controls.nombre.invalid">
+              Minimo 2 caracteres.
+            </small>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="especie" class="form-label">Especie</label>
+            <select id="especie" class="form-select" formControlName="especie">
+              <option *ngFor="let especie of especies" [value]="especie">{{ especie }}</option>
+            </select>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="raza" class="form-label">Raza</label>
+            <input id="raza" class="form-control" formControlName="raza" />
+            <small class="text-danger" *ngIf="mascotaForm.controls.raza.touched && mascotaForm.controls.raza.invalid">
+              Minimo 2 caracteres.
+            </small>
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+            <input id="fechaNacimiento" type="date" class="form-control" formControlName="fechaNacimiento" />
+          </div>
+
+          <div class="col-12 col-md-3">
+            <label for="pesoKg" class="form-label">Peso (kg)</label>
+            <input id="pesoKg" type="number" min="0.1" step="0.1" class="form-control" formControlName="pesoKg" />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="nombreDueno" class="form-label">Nombre del dueno</label>
+            <input id="nombreDueno" class="form-control" formControlName="nombreDueno" />
+            <small class="text-danger" *ngIf="mascotaForm.controls.nombreDueno.touched && mascotaForm.controls.nombreDueno.invalid">
+              Ingresa nombre y apellido.
+            </small>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="telefonoDueno" class="form-label">Telefono</label>
+            <input id="telefonoDueno" class="form-control" formControlName="telefonoDueno" placeholder="+51999999999" />
+            <small
+              class="text-danger"
+              *ngIf="mascotaForm.controls.telefonoDueno.touched && mascotaForm.controls.telefonoDueno.invalid"
+            >
+              Solo numeros (7 a 15 digitos).
+            </small>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <label for="emailDueno" class="form-label">Email</label>
+            <input id="emailDueno" type="email" class="form-control" formControlName="emailDueno" />
+            <small class="text-danger" *ngIf="mascotaForm.controls.emailDueno.touched && mascotaForm.controls.emailDueno.invalid">
+              Correo invalido.
+            </small>
+          </div>
+
+          <div class="col-12">
+            <label for="notas" class="form-label">Notas clinicas iniciales</label>
+            <textarea id="notas" rows="3" class="form-control" formControlName="notas"></textarea>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="submit" class="btn btn-primary">Guardar mascota</button>
+        </div>
+      </form>
+
+      <div class="alert alert-success py-2 mt-3 mb-0" *ngIf="successMessage">{{ successMessage }}</div>
+    </div>
+  </article>
+
+  <article class="card shadow-sm border-0">
+    <div class="card-body">
+      <h3 class="h5 fw-semibold mb-3">Mascotas registradas</h3>
+
+      <div *ngIf="mascotas.length === 0" class="empty-state">
+        Aun no hay mascotas registradas.
+      </div>
+
+      <div class="table-responsive" *ngIf="mascotas.length > 0">
+        <table class="table table-striped align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Mascota</th>
+              <th>Dueno</th>
+              <th>Contacto</th>
+              <th>Especie</th>
+              <th>Registro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let mascota of mascotas">
+              <td>
+                <strong>{{ mascota.nombre }}</strong>
+                <div class="text-muted small">{{ mascota.raza }}</div>
+              </td>
+              <td>{{ mascota.dueno.nombreCompleto }}</td>
+              <td>
+                <div>{{ mascota.dueno.telefono }}</div>
+                <div class="text-muted small">{{ mascota.dueno.email }}</div>
+              </td>
+              <td>{{ mascota.especie }}</td>
+              <td>{{ mascota.createdAt | date: 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </article>
+</section>

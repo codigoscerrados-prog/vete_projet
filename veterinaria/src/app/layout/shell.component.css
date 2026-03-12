@@ -1,0 +1,19 @@
+.shell-root {
+  min-height: 100vh;
+  background: linear-gradient(140deg, #fff7ed 0%, #f8fafc 50%, #eef2ff 100%);
+}
+
+.shell-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-pill {
+  border-radius: 999px;
+}
+
+.active-link {
+  background-color: #0ea5e9 !important;
+  color: #ffffff !important;
+  border-color: #0ea5e9 !important;
+}
