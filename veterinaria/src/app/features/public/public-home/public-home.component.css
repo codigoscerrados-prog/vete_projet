@@ -1,91 +1,67 @@
 .public-home {
-  background:
-    radial-gradient(circle at top left, rgb(14 165 233 / 0.08), transparent 24%),
-    linear-gradient(180deg, #fcfffd 0%, #f8fafc 52%, #eef6ff 100%);
+  background: linear-gradient(180deg, #fcfffd 0%, #f8fafc 55%, #eef6ff 100%);
   color: #0f172a;
 }
 
-.hero-section {
+.hero-wrap {
   background:
-    radial-gradient(circle at 10% 10%, rgb(16 185 129 / 0.12), transparent 26%),
-    radial-gradient(circle at 90% 10%, rgb(250 204 21 / 0.16), transparent 22%);
+    radial-gradient(circle at top left, rgb(16 185 129 / 0.12), transparent 24%),
+    radial-gradient(circle at top right, rgb(59 130 246 / 0.12), transparent 22%);
 }
 
 .public-navbar {
-  background: rgb(255 255 255 / 0.78);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgb(148 163 184 / 0.18);
-  box-shadow: 0 18px 40px rgb(15 23 42 / 6%);
+  background: rgb(255 255 255 / 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgb(148 163 184 / 0.16);
+  box-shadow: 0 16px 38px rgb(15 23 42 / 6%);
 }
 
 .brand-mark {
   display: inline-grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
   background: linear-gradient(135deg, #0f766e 0%, #1d4ed8 100%);
   color: #fff;
   font-weight: 800;
 }
 
+.hero-banner {
+  padding: 2rem;
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.86) 0%, rgb(240 253 250 / 0.92) 100%);
+  box-shadow: 0 22px 48px rgb(15 23 42 / 8%);
+}
+
 .hero-title {
   max-width: 10ch;
-  line-height: 0.94;
+  line-height: 0.95;
 }
 
-.hero-lead {
-  max-width: 56ch;
+.hero-copy {
+  max-width: 42rem;
 }
 
-.benefit-card,
-.service-card,
-.info-panel,
-.booking-side-card {
+.banner-card,
+.specialty-card,
+.booking-card {
   border-radius: 24px;
 }
 
-.benefit-card {
-  background: rgb(255 255 255 / 0.88);
+.banner-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
 
-.hero-feature-card {
-  border-radius: 32px;
-  background: linear-gradient(150deg, #0f172a 0%, #1d4ed8 60%, #0f766e 100%);
-}
-
-.stat-chip {
-  height: 100%;
-  padding: 1rem;
-  border-radius: 20px;
-  background: rgb(255 255 255 / 0.12);
-  border: 1px solid rgb(255 255 255 / 0.08);
-  color: #f8fafc;
-}
-
-.stat-chip strong {
-  font-size: 1.8rem;
-  line-height: 1;
-  margin-bottom: 0.35rem;
-}
-
-.stat-chip span {
-  font-size: 0.92rem;
-  color: rgb(226 232 240 / 0.9);
-}
-
-.public-alert {
-  border: 1px solid rgb(255 255 255 / 0.08);
-  background: rgb(255 255 255 / 0.12);
-  color: #f8fafc;
+.section-header {
+  max-width: 42rem;
 }
 
 .section-kicker {
   display: inline-flex;
-  align-items: center;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgb(15 118 110 / 0.16);
+  background: rgb(15 118 110 / 0.1);
   color: #0f766e;
   font-size: 0.74rem;
   font-weight: 800;
@@ -93,26 +69,21 @@
   letter-spacing: 0.08em;
 }
 
-.border-white-25 {
-  border-color: rgb(255 255 255 / 0.25);
+.section-kicker-light {
+  background: rgb(255 255 255 / 0.12);
+  color: #f8fafc;
 }
 
-.service-note,
-.soft-success {
-  background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
-}
-
-.service-card {
+.specialty-card {
   transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
-.service-card:hover,
-.info-panel:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 20px 36px rgb(15 23 42 / 10%);
+.specialty-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgb(15 23 42 / 10%);
 }
 
-.service-pill {
+.specialty-pill {
   display: inline-flex;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
@@ -122,52 +93,39 @@
   font-weight: 700;
 }
 
-.experience-section {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.55) 0%, rgb(236 253 245 / 0.75) 100%);
-}
-
-.step-index {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: #0f766e;
-  margin-bottom: 0.9rem;
-}
-
-.dark-panel {
-  background: linear-gradient(140deg, #0f172a 0%, #1e3a8a 100%);
-}
-
 .booking-section {
   background: linear-gradient(145deg, #0f172a 0%, #0f766e 100%);
 }
 
-.booking-form-card {
-  border-radius: 32px;
-}
-
-.booking-side-card {
-  background: #ffffff;
-}
-
-.urgent-card {
-  border-radius: 24px;
-  background: linear-gradient(145deg, #111827 0%, #1e40af 100%);
+.booking-copy {
+  position: sticky;
+  top: 2rem;
 }
 
 .form-control,
 .form-select {
-  border-radius: 16px;
+  border-radius: 14px;
   border-color: #dbe4f0;
 }
 
 .form-control:focus,
 .form-select:focus {
   border-color: #0f766e;
-  box-shadow: 0 0 0 0.2rem rgb(15 118 110 / 0.15);
+  box-shadow: 0 0 0 0.2rem rgb(15 118 110 / 0.14);
 }
 
 @media (max-width: 991.98px) {
   .hero-title {
     max-width: none;
+  }
+
+  .booking-copy {
+    position: static;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-banner {
+    padding: 1.25rem;
   }
 }

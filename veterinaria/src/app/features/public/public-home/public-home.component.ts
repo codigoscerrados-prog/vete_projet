@@ -33,28 +33,21 @@ export class PublicHomeComponent {
     'Odontologia',
     'Urgencias coordinadas',
   ];
-  readonly beneficios = [
-    'Reserva online en pocos minutos.',
-    'Equipo medico para perros, gatos, aves y pequenos companions.',
-    'Seguimiento profesional antes, durante y despues de la consulta.',
-  ];
-  readonly stats = [
-    { value: '12+', label: 'anos acompanando familias y mascotas' },
-    { value: '4', label: 'especialistas disponibles por agenda' },
-    { value: '24h', label: 'respuesta para solicitudes prioritarias' },
-  ];
-  readonly serviciosDestacados = [
+  readonly especialidades = [
     {
-      titulo: 'Consulta integral',
-      descripcion: 'Chequeos, diagnostico temprano y planes de bienestar adaptados a cada etapa.',
+      tag: 'Consulta',
+      titulo: 'Medicina general',
+      descripcion: 'Evaluacion completa, control preventivo y seguimiento clinico para cada mascota.',
     },
     {
-      titulo: 'Vacunas y prevencion',
-      descripcion: 'Esquemas preventivos, desparasitacion y controles periodicos.',
+      tag: 'Prevencion',
+      titulo: 'Vacunas y bienestar',
+      descripcion: 'Planes preventivos, desparasitacion y control de etapas de crecimiento.',
     },
     {
-      titulo: 'Imagen y laboratorio',
-      descripcion: 'Apoyo clinico para decisiones mas rapidas y tratamientos mas precisos.',
+      tag: 'Especialidad',
+      titulo: 'Dermatologia y control',
+      descripcion: 'Atencion para piel, alergias y revisiones que necesitan observacion mas precisa.',
     },
   ];
 
@@ -138,11 +131,6 @@ export class PublicHomeComponent {
     });
     this.refreshAvailability();
   }
-
-  seleccionarFecha(fecha: string): void {
-    this.citaPublicaForm.patchValue({ fecha, hora: '' });
-  }
-
   private refreshAvailability(): void {
     const fecha = this.citaPublicaForm.controls.fecha.value || this.today;
     this.disponibilidad = this.store.obtenerHorariosDisponibles(fecha);

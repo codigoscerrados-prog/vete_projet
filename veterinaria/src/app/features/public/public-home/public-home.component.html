@@ -1,12 +1,12 @@
 <section class="public-home">
-  <header class="hero-section py-4 py-lg-5">
+  <header class="hero-wrap py-4 py-lg-5">
     <div class="container-xl">
-      <nav class="navbar navbar-expand-lg public-navbar rounded-4 px-3 px-lg-4 py-3 mb-4 mb-lg-5">
+      <nav class="navbar navbar-expand-lg public-navbar rounded-4 px-3 px-lg-4 py-3">
         <a class="navbar-brand d-flex align-items-center gap-3" href="#">
           <span class="brand-mark">VC</span>
           <span>
             <strong class="d-block">VetCare Studio</strong>
-            <small class="text-secondary">Clinica veterinaria para toda la familia</small>
+            <small class="text-secondary">Clinica veterinaria</small>
           </span>
         </a>
 
@@ -23,71 +23,41 @@
         </button>
 
         <div id="publicNav" class="collapse navbar-collapse justify-content-lg-end mt-3 mt-lg-0">
-          <div class="navbar-nav align-items-lg-center gap-lg-2">
-            <a class="nav-link fw-semibold" href="#servicios">Servicios</a>
-            <a class="nav-link fw-semibold" href="#experiencia">Experiencia</a>
-            <a class="nav-link fw-semibold" href="#reservas">Reservar cita</a>
-            <a routerLink="/auth/login" class="btn btn-outline-dark rounded-pill px-4 ms-lg-2">
-              Acceso del personal
-            </a>
+          <div class="navbar-nav align-items-lg-center gap-2">
+            <a class="nav-link fw-semibold" href="#especialidades">Especialidades</a>
+            <a href="#reservas" class="btn btn-primary rounded-pill px-4">Agendar cita</a>
+            <a routerLink="/auth/login" class="btn btn-outline-dark rounded-pill px-4">Login al panel</a>
           </div>
         </div>
       </nav>
 
-      <div class="row g-4 g-xl-5 align-items-center">
-        <div class="col-12 col-lg-7">
-          <span class="badge rounded-pill text-bg-light border border-success-subtle text-success-emphasis px-3 py-2">
-            Veterinaria abierta para todos
-          </span>
-          <h1 class="display-3 fw-bold mt-3 mb-3 hero-title">
-            Reserva la consulta ideal para tu mascota con una experiencia clara y moderna.
-          </h1>
-          <p class="lead text-secondary mb-4 hero-lead">
-            Consultas, vacunas, evaluaciones preventivas y seguimiento clinico con una agenda online
-            donde puedes elegir fecha, horario, profesional y motivo de la visita.
-          </p>
+      <div class="hero-banner mt-4 mt-lg-5">
+        <div class="row align-items-center g-4">
+          <div class="col-12 col-lg-7">
+            <span class="badge rounded-pill text-bg-light border border-success-subtle text-success-emphasis px-3 py-2">
+              Cuidado veterinario cercano y moderno
+            </span>
+            <h1 class="display-3 fw-bold mt-3 mb-3 hero-title">
+              Tu mascota merece una atencion clara, rapida y profesional.
+            </h1>
+            <p class="lead text-secondary mb-4 hero-copy">
+              Agenda una cita online con fecha, horario y especialista disponible en pocos pasos.
+            </p>
 
-          <div class="d-flex flex-wrap gap-3 mb-4">
-            <a href="#reservas" class="btn btn-primary btn-lg rounded-pill px-4">Programar una cita</a>
-            <a href="#servicios" class="btn btn-light btn-lg rounded-pill px-4 border">Ver servicios</a>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-12 col-md-4" *ngFor="let beneficio of beneficios">
-              <div class="card border-0 shadow-sm h-100 benefit-card">
-                <div class="card-body">
-                  <div class="small text-uppercase fw-bold text-success-emphasis mb-2">Ventaja</div>
-                  <p class="mb-0 text-secondary">{{ beneficio }}</p>
-                </div>
-              </div>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="#reservas" class="btn btn-primary btn-lg rounded-pill px-4">Agendar ahora</a>
+              <a href="#especialidades" class="btn btn-light btn-lg rounded-pill px-4 border">Ver especialidades</a>
             </div>
           </div>
-        </div>
 
-        <div class="col-12 col-lg-5">
-          <div class="card border-0 shadow-lg hero-feature-card overflow-hidden">
-            <div class="card-body p-4 p-xl-5">
-              <div class="d-flex justify-content-between align-items-start mb-4">
-                <span class="badge rounded-pill text-bg-warning">Atencion destacada</span>
-                <span class="small text-white-50">Disponibilidad visible</span>
-              </div>
-
-              <h2 class="h1 text-white mb-3">Citas preventivas, vacunas y urgencias coordinadas</h2>
-              <p class="text-white-50 mb-4">
-                Organizamos la visita desde el primer contacto para que llegues con toda la informacion lista.
-              </p>
-
-              <div class="row g-3">
-                <div class="col-12 col-md-4 col-lg-12 col-xl-4" *ngFor="let stat of stats">
-                  <div class="stat-chip h-100">
-                    <strong class="d-block">{{ stat.value }}</strong>
-                    <span>{{ stat.label }}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="alert public-alert mt-4 mb-0">
-                Puedes reservar ahora mismo y la cita queda registrada en la agenda del equipo.
+          <div class="col-12 col-lg-5">
+            <div class="card border-0 shadow-lg banner-card">
+              <div class="card-body p-4 p-lg-5">
+                <div class="small text-uppercase fw-bold text-success-emphasis mb-2">Informacion</div>
+                <h2 class="h2 mb-3">Consultas, vacunas y seguimiento clinico</h2>
+                <p class="text-secondary mb-0">
+                  Un espacio pensado para familias que buscan una veterinaria confiable y una reserva simple.
+                </p>
               </div>
             </div>
           </div>
@@ -96,35 +66,23 @@
     </div>
   </header>
 
-  <section id="servicios" class="py-5">
+  <section id="especialidades" class="py-5">
     <div class="container-xl">
-      <div class="row align-items-end g-3 mb-4">
-        <div class="col-lg-7">
-          <span class="section-kicker">Servicios</span>
-          <h2 class="display-6 fw-bold mb-2">Una veterinaria pensada para acompanar cada etapa de vida</h2>
-          <p class="text-secondary mb-0">
-            Desde controles preventivos hasta apoyos diagnosticos, buscamos una atencion cercana y bien organizada.
-          </p>
-        </div>
-        <div class="col-lg-5">
-          <div class="card border-0 shadow-sm service-note">
-            <div class="card-body">
-              <div class="small text-uppercase fw-bold text-success-emphasis mb-2">Lo que nos diferencia</div>
-              <p class="mb-0 text-secondary">
-                Agenda online, historial centralizado y una experiencia mas comoda para tutores y pacientes.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="text-center section-header mx-auto mb-4">
+        <span class="section-kicker">Especialidades</span>
+        <h2 class="display-6 fw-bold mt-3 mb-2">Atencion enfocada en lo que tu mascota necesita</h2>
+        <p class="text-secondary mb-0">
+          Un bloque simple con las areas principales de atencion de la veterinaria.
+        </p>
       </div>
 
       <div class="row g-4">
-        <div class="col-12 col-md-6 col-xl-4" *ngFor="let servicio of serviciosDestacados">
-          <article class="card border-0 shadow-sm h-100 service-card">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let especialidad of especialidades">
+          <article class="card border-0 shadow-sm h-100 specialty-card">
             <div class="card-body p-4">
-              <span class="service-pill">{{ servicio.titulo }}</span>
-              <h3 class="h4 mt-3 mb-2">{{ servicio.titulo }}</h3>
-              <p class="text-secondary mb-0">{{ servicio.descripcion }}</p>
+              <span class="specialty-pill">{{ especialidad.tag }}</span>
+              <h3 class="h4 mt-3 mb-2">{{ especialidad.titulo }}</h3>
+              <p class="text-secondary mb-0">{{ especialidad.descripcion }}</p>
             </div>
           </article>
         </div>
@@ -132,234 +90,98 @@
     </div>
   </section>
 
-  <section id="experiencia" class="py-5 experience-section">
+  <section id="reservas" class="py-5 booking-section">
     <div class="container-xl">
-      <div class="row g-4">
+      <div class="row g-4 align-items-start">
         <div class="col-12 col-lg-4">
-          <div class="card border-0 shadow-sm h-100 info-panel soft-success">
-            <div class="card-body p-4">
-              <span class="section-kicker">Experiencia</span>
-              <h3 class="h2 mt-2 mb-3">Un proceso simple desde la primera visita</h3>
-              <p class="text-secondary mb-0">
-                Queremos que reservar una cita sea rapido, entendible y con la informacion necesaria desde el inicio.
-              </p>
-            </div>
+          <div class="booking-copy">
+            <span class="section-kicker section-kicker-light">Agendar cita</span>
+            <h2 class="display-6 fw-bold text-white mt-3 mb-3">Reserva una visita sin complicaciones</h2>
+            <p class="text-white-50 mb-0">
+              Completa los datos de tu mascota, elige horario y deja registrada la consulta.
+            </p>
           </div>
         </div>
 
         <div class="col-12 col-lg-8">
-          <div class="row g-4">
-            <div class="col-md-4">
-              <div class="card border-0 shadow-sm h-100 info-panel">
-                <div class="card-body p-4">
-                  <div class="step-index">01</div>
-                  <h3 class="h5">Cuentanos sobre tu mascota</h3>
-                  <p class="text-secondary mb-0">Nombre, especie, raza y datos del tutor para dejar todo listo.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card border-0 shadow-sm h-100 info-panel">
-                <div class="card-body p-4">
-                  <div class="step-index">02</div>
-                  <h3 class="h5">Elige horario y profesional</h3>
-                  <p class="text-secondary mb-0">Solo aparecen horarios realmente libres para la fecha elegida.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="card border-0 shadow-sm h-100 info-panel dark-panel">
-                <div class="card-body p-4">
-                  <div class="step-index text-warning">03</div>
-                  <h3 class="h5 text-white">Confirma y llega con tranquilidad</h3>
-                  <p class="text-white-50 mb-0">La solicitud entra directo al sistema para que el equipo prepare la atencion.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="reservas" class="py-5 booking-section">
-    <div class="container-xl">
-      <div class="row align-items-end g-3 mb-4">
-        <div class="col-lg-7">
-          <span class="section-kicker text-white border-white-25">Reserva online</span>
-          <h2 class="display-6 fw-bold text-white mb-2">Agenda la visita con fecha, horario y motivo en un solo paso</h2>
-          <p class="text-white-50 mb-0">
-            Esta seccion esta pensada para el cliente final. Solo completa los datos y la reserva queda creada.
-          </p>
-        </div>
-        <div class="col-lg-5">
-          <div class="card border-0 booking-side-card">
-            <div class="card-body p-4">
-              <h3 class="h5">Lo que puedes hacer aqui</h3>
-              <ul class="mb-0 text-secondary ps-3">
-                <li>Elegir el veterinario disponible</li>
-                <li>Seleccionar fecha y horario</li>
-                <li>Registrar datos del tutor y la mascota</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-12 col-xl-8">
-          <div class="card border-0 shadow-lg booking-form-card">
+          <div class="card border-0 shadow-lg booking-card">
             <div class="card-body p-4 p-lg-5">
               <form [formGroup]="citaPublicaForm" (ngSubmit)="reservarCita()" novalidate>
                 <div class="row g-3">
                   <div class="col-12 col-md-6">
                     <label class="form-label" for="nombreMascota">Nombre de la mascota</label>
-                    <input id="nombreMascota" class="form-control form-control-lg" formControlName="nombreMascota" />
+                    <input id="nombreMascota" class="form-control" formControlName="nombreMascota" />
                   </div>
 
                   <div class="col-12 col-md-3">
                     <label class="form-label" for="especie">Especie</label>
-                    <select id="especie" class="form-select form-select-lg" formControlName="especie">
+                    <select id="especie" class="form-select" formControlName="especie">
                       <option *ngFor="let especie of especies" [value]="especie">{{ especie }}</option>
                     </select>
                   </div>
 
                   <div class="col-12 col-md-3">
                     <label class="form-label" for="pesoKg">Peso (kg)</label>
-                    <input
-                      id="pesoKg"
-                      type="number"
-                      min="0.1"
-                      step="0.1"
-                      class="form-control form-control-lg"
-                      formControlName="pesoKg"
-                    />
+                    <input id="pesoKg" type="number" min="0.1" step="0.1" class="form-control" formControlName="pesoKg" />
                   </div>
 
                   <div class="col-12 col-md-6">
-                    <label class="form-label" for="raza">Raza</label>
-                    <input id="raza" class="form-control form-control-lg" formControlName="raza" />
-                  </div>
-
-                  <div class="col-12 col-md-6">
-                    <label class="form-label" for="fechaNacimiento">Fecha de nacimiento</label>
-                    <input
-                      id="fechaNacimiento"
-                      type="date"
-                      class="form-control form-control-lg"
-                      formControlName="fechaNacimiento"
-                    />
-                  </div>
-
-                  <div class="col-12 col-md-4">
                     <label class="form-label" for="nombreDueno">Nombre del tutor</label>
-                    <input id="nombreDueno" class="form-control form-control-lg" formControlName="nombreDueno" />
+                    <input id="nombreDueno" class="form-control" formControlName="nombreDueno" />
                   </div>
 
-                  <div class="col-12 col-md-4">
+                  <div class="col-12 col-md-3">
                     <label class="form-label" for="telefonoDueno">Telefono</label>
-                    <input id="telefonoDueno" class="form-control form-control-lg" formControlName="telefonoDueno" />
+                    <input id="telefonoDueno" class="form-control" formControlName="telefonoDueno" />
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label class="form-label" for="emailDueno">Correo</label>
+                    <input id="emailDueno" class="form-control" formControlName="emailDueno" />
                   </div>
 
                   <div class="col-12 col-md-4">
-                    <label class="form-label" for="emailDueno">Correo</label>
-                    <input id="emailDueno" class="form-control form-control-lg" formControlName="emailDueno" />
-                  </div>
-
-                  <div class="col-12 col-md-3">
                     <label class="form-label" for="fecha">Fecha</label>
-                    <input id="fecha" type="date" class="form-control form-control-lg" formControlName="fecha" />
+                    <input id="fecha" type="date" class="form-control" formControlName="fecha" />
                   </div>
 
-                  <div class="col-12 col-md-3">
+                  <div class="col-12 col-md-4">
                     <label class="form-label" for="hora">Horario</label>
-                    <select id="hora" class="form-select form-select-lg" formControlName="hora">
+                    <select id="hora" class="form-select" formControlName="hora">
                       <option value="">Selecciona</option>
                       <option *ngFor="let hora of disponibilidad" [value]="hora">{{ hora }}</option>
                     </select>
                   </div>
 
-                  <div class="col-12 col-md-3">
+                  <div class="col-12 col-md-4">
                     <label class="form-label" for="veterinario">Veterinario</label>
-                    <select id="veterinario" class="form-select form-select-lg" formControlName="veterinario">
+                    <select id="veterinario" class="form-select" formControlName="veterinario">
                       <option value="">Selecciona</option>
                       <option *ngFor="let veterinario of veterinarios" [value]="veterinario">{{ veterinario }}</option>
                     </select>
                   </div>
 
-                  <div class="col-12 col-md-3">
-                    <label class="form-label" for="tipoServicio">Servicio</label>
-                    <select id="tipoServicio" class="form-select form-select-lg" formControlName="tipoServicio">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="tipoServicio">Tipo de servicio</label>
+                    <select id="tipoServicio" class="form-select" formControlName="tipoServicio">
                       <option value="">Selecciona</option>
                       <option *ngFor="let servicio of servicios" [value]="servicio">{{ servicio }}</option>
                     </select>
                   </div>
 
-                  <div class="col-12">
-                    <label class="form-label" for="motivo">Motivo de la consulta</label>
-                    <input id="motivo" class="form-control form-control-lg" formControlName="motivo" />
-                  </div>
-
-                  <div class="col-12">
-                    <label class="form-label" for="notas">Notas adicionales</label>
-                    <textarea
-                      id="notas"
-                      rows="4"
-                      class="form-control"
-                      formControlName="notas"
-                      placeholder="Describe sintomas, comportamiento o informacion importante"
-                    ></textarea>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="motivo">Motivo</label>
+                    <input id="motivo" class="form-control" formControlName="motivo" />
                   </div>
                 </div>
 
                 <div class="d-flex justify-content-end mt-4">
-                  <button type="submit" class="btn btn-primary btn-lg rounded-pill px-4">Reservar cita</button>
+                  <button type="submit" class="btn btn-primary rounded-pill px-4">Reservar cita</button>
                 </div>
 
                 <div class="alert alert-success mt-3 mb-0" *ngIf="successMessage">{{ successMessage }}</div>
                 <div class="alert alert-danger mt-3 mb-0" *ngIf="errorMessage">{{ errorMessage }}</div>
               </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-xl-4">
-          <div class="d-grid gap-4">
-            <div class="card border-0 shadow-sm booking-side-card h-100">
-              <div class="card-body p-4">
-                <div class="small text-uppercase fw-bold text-success-emphasis mb-2">Disponibilidad real</div>
-                <h3 class="h4">Horarios visibles segun la fecha elegida</h3>
-                <p class="text-secondary mb-0">
-                  Si cambias el dia, los horarios se actualizan de inmediato para mostrar solo espacios disponibles.
-                </p>
-              </div>
-            </div>
-
-            <div class="card border-0 shadow-sm booking-side-card h-100">
-              <div class="card-body p-4">
-                <div class="small text-uppercase fw-bold text-success-emphasis mb-2">Antes de venir</div>
-                <p class="text-secondary mb-3">
-                  Trae cartilla de vacunas, medicamentos actuales y cualquier estudio previo si ya existe.
-                </p>
-                <div class="d-flex flex-wrap gap-2">
-                  <span class="badge text-bg-light border">Consulta general</span>
-                  <span class="badge text-bg-light border">Vacunas</span>
-                  <span class="badge text-bg-light border">Control</span>
-                  <span class="badge text-bg-light border">Urgencias</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="card border-0 shadow-sm urgent-card">
-              <div class="card-body p-4">
-                <div class="small text-uppercase fw-bold text-warning mb-2">Atencion prioritaria</div>
-                <h3 class="h4 text-white">Si tu mascota esta en una situacion urgente, reserva y contactanos de inmediato.</h3>
-                <p class="text-white-50 mb-0">
-                  El formulario tambien nos ayuda a preparar la recepcion antes de tu llegada.
-                </p>
-              </div>
             </div>
           </div>
         </div>
