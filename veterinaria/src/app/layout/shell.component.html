@@ -2,11 +2,12 @@
   <header class="shell-header">
     <div class="container py-3 d-flex flex-wrap align-items-center justify-content-between gap-3">
       <div>
-        <h1 class="h4 fw-bold mb-1">Veterinaria</h1>
-        <p class="mb-0 text-muted small">Digitalizacion de mascotas, citas e historial clinico</p>
+        <span class="brand-kicker">Panel veterinario</span>
+        <h1 class="h4 fw-bold mb-1">VetCare Studio</h1>
+        <p class="mb-0 text-muted small">Agenda moderna, seguimiento de pacientes y experiencia digital para tutores</p>
       </div>
       <div class="d-flex align-items-center gap-3">
-        <span class="text-muted small">Sesion: {{ usuarioActual }}</span>
+        <span class="text-muted small">Sesion activa: {{ usuarioActual }}</span>
         <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cerrarSesion()">
           Cerrar sesion
         </button>
@@ -17,7 +18,15 @@
   <nav class="shell-nav border-bottom">
     <div class="container py-2 d-flex gap-2 flex-wrap">
       <a
-        routerLink="/mascotas"
+        routerLink="/panel/inicio"
+        routerLinkActive="active-link"
+        class="btn btn-light btn-sm nav-pill"
+        ariaCurrentWhenActive="page"
+      >
+        Inicio
+      </a>
+      <a
+        routerLink="/panel/mascotas"
         routerLinkActive="active-link"
         class="btn btn-light btn-sm nav-pill"
         ariaCurrentWhenActive="page"
@@ -25,7 +34,7 @@
         Mascotas
       </a>
       <a
-        routerLink="/citas"
+        routerLink="/panel/citas"
         routerLinkActive="active-link"
         class="btn btn-light btn-sm nav-pill"
         ariaCurrentWhenActive="page"
@@ -33,7 +42,7 @@
         Citas
       </a>
       <a
-        routerLink="/historial"
+        routerLink="/panel/historial"
         routerLinkActive="active-link"
         class="btn btn-light btn-sm nav-pill"
         ariaCurrentWhenActive="page"

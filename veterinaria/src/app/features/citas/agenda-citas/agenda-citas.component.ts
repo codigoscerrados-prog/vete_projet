@@ -8,6 +8,7 @@ import { VeterinariaStoreService } from '../../../core/services/veterinaria-stor
 
 interface CitaConMascota extends Cita {
   nombreMascota: string;
+  nombreTutor: string;
 }
 
 @Component({
@@ -30,12 +31,31 @@ export class AgendaCitasComponent {
   calendario: DayAvailability[] = [];
   successMessage = '';
   errorMessage = '';
+  readonly veterinarios = [
+    'Dra. Valeria Rojas',
+    'Dr. Mateo Salinas',
+    'Dra. Camila Paredes',
+    'Dr. Diego Mena',
+  ];
+  readonly tiposServicio = [
+    'Consulta general',
+    'Vacunacion',
+    'Control postoperatorio',
+    'Dermatologia',
+    'Odontologia',
+    'Urgencia prioritaria',
+  ];
 
   readonly citaForm = this.fb.nonNullable.group({
     mascotaId: ['', [Validators.required]],
     fecha: [this.today, [Validators.required]],
     hora: ['', [Validators.required]],
+    veterinario: ['', [Validators.required]],
+    tipoServicio: ['', [Validators.required]],
+    telefonoContacto: ['', [Validators.required, Validators.minLength(7)]],
+    emailContacto: ['', [Validators.required, Validators.email]],
     motivo: ['', [Validators.required, Validators.minLength(5)]],
+    notas: [''],
   });
 
   constructor() {
@@ -44,6 +64,10 @@ export class AgendaCitasComponent {
       .subscribe(mascotas => (this.mascotas = mascotas));
 
     this.store.citas$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.refreshAgendaData());
+
+    this.citaForm.controls.mascotaId.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(mascotaId => this.autocompletarDatosContacto(mascotaId));
 
     this.citaForm.controls.fecha.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))
@@ -66,6 +90,11 @@ export class AgendaCitasComponent {
       mascotaId: form.mascotaId,
       fechaHora: this.scheduler.buildDateTime(form.fecha, form.hora),
       motivo: form.motivo,
+      veterinario: form.veterinario,
+      tipoServicio: form.tipoServicio,
+      telefonoContacto: form.telefonoContacto,
+      emailContacto: form.emailContacto,
+      notas: form.notas,
     });
 
     if (!response.ok) {
@@ -74,7 +103,13 @@ export class AgendaCitasComponent {
     }
 
     this.successMessage = response.message;
-    this.citaForm.patchValue({ hora: '', motivo: '' });
+    this.citaForm.patchValue({
+      hora: '',
+      veterinario: '',
+      tipoServicio: '',
+      motivo: '',
+      notas: '',
+    });
     this.refreshAgendaData();
   }
 
@@ -99,6 +134,10 @@ export class AgendaCitasComponent {
     return this.store.getMascotaById(mascotaId)?.nombre ?? 'Mascota sin registro';
   }
 
+  get mascotaSeleccionada(): Mascota | undefined {
+    return this.store.getMascotaById(this.citaForm.controls.mascotaId.value);
+  }
+
   private refreshAgendaData(): void {
     const fechaSeleccionada = this.citaForm.controls.fecha.value ?? this.today;
     this.disponibilidadHoy = this.store.obtenerHorariosDisponibles(fechaSeleccionada);
@@ -106,6 +145,24 @@ export class AgendaCitasComponent {
     this.citasDelDia = this.store.obtenerCitasPorFecha(fechaSeleccionada).map(cita => ({
       ...cita,
       nombreMascota: this.obtenerNombreMascota(cita.mascotaId),
+      nombreTutor: this.store.getMascotaById(cita.mascotaId)?.dueno.nombreCompleto ?? 'Tutor no registrado',
     }));
+  }
+
+  private autocompletarDatosContacto(mascotaId: string): void {
+    const mascota = this.store.getMascotaById(mascotaId);
+
+    if (!mascota) {
+      this.citaForm.patchValue({ telefonoContacto: '', emailContacto: '' }, { emitEvent: false });
+      return;
+    }
+
+    this.citaForm.patchValue(
+      {
+        telefonoContacto: mascota.dueno.telefono,
+        emailContacto: mascota.dueno.email,
+      },
+      { emitEvent: false },
+    );
   }
 }

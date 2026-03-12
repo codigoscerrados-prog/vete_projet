@@ -10,6 +10,11 @@ interface CreateCitaResult {
   message: string;
 }
 
+interface PublicAppointmentDraft {
+  mascota: MascotaDraft;
+  cita: Omit<CitaDraft, 'mascotaId'>;
+}
+
 @Injectable({ providedIn: 'root' })
 export class VeterinariaStoreService {
   private static readonly MASCOTAS_KEY = 'veterinaria_mascotas';
@@ -48,6 +53,21 @@ export class VeterinariaStoreService {
     return mascota;
   }
 
+  registrarCitaPublica(draft: PublicAppointmentDraft): CreateCitaResult {
+    const mascotaExistente = this.findMascotaByOwnerAndName(
+      draft.mascota.nombre,
+      draft.mascota.dueno.email,
+      draft.mascota.dueno.nombreCompleto,
+    );
+
+    const mascota = mascotaExistente ?? this.registrarMascota(draft.mascota);
+
+    return this.registrarCita({
+      mascotaId: mascota.id,
+      ...draft.cita,
+    });
+  }
+
   registrarCita(draft: CitaDraft): CreateCitaResult {
     const mascota = this.getMascotaById(draft.mascotaId);
     if (!mascota) {
@@ -67,6 +87,11 @@ export class VeterinariaStoreService {
       mascotaId: draft.mascotaId,
       fechaHora: draft.fechaHora,
       motivo: draft.motivo.trim(),
+      tipoServicio: draft.tipoServicio.trim(),
+      veterinario: draft.veterinario.trim(),
+      telefonoContacto: draft.telefonoContacto.trim(),
+      emailContacto: draft.emailContacto.trim().toLowerCase(),
+      notas: draft.notas.trim(),
       estado: 'pendiente',
       resumenAtencion: '',
       createdAt: new Date().toISOString(),
@@ -120,6 +145,10 @@ export class VeterinariaStoreService {
       .sort((a, b) => b.fechaHora.localeCompare(a.fechaHora));
   }
 
+  getCitasSnapshot(): Cita[] {
+    return [...this.citasSubject.value].sort((a, b) => a.fechaHora.localeCompare(b.fechaHora));
+  }
+
   obtenerHorariosDisponibles(fecha: string): string[] {
     const citasDelDia = this.obtenerCitasPorFecha(fecha).filter(cita => cita.estado !== 'cancelada');
     const ocupados = new Set(citasDelDia.map(cita => cita.fechaHora.slice(11, 16)));
@@ -139,7 +168,9 @@ export class VeterinariaStoreService {
 
   private loadFromStorage(): void {
     const mascotas = this.storage.read<Mascota[]>(VeterinariaStoreService.MASCOTAS_KEY, []);
-    const citas = this.storage.read<Cita[]>(VeterinariaStoreService.CITAS_KEY, []);
+    const citas = this.storage
+      .read<Cita[]>(VeterinariaStoreService.CITAS_KEY, [])
+      .map(cita => this.normalizeCita(cita));
 
     this.mascotasSubject.next(mascotas);
     this.citasSubject.next(citas);
@@ -156,5 +187,33 @@ export class VeterinariaStoreService {
   private buildId(prefix: string): string {
     const random = Math.random().toString(36).slice(2, 8);
     return `${prefix}-${Date.now()}-${random}`;
+  }
+
+  private findMascotaByOwnerAndName(
+    nombreMascota: string,
+    emailDueno: string,
+    nombreDueno: string,
+  ): Mascota | undefined {
+    const mascotaNormalizada = nombreMascota.trim().toLowerCase();
+    const emailNormalizado = emailDueno.trim().toLowerCase();
+    const duenoNormalizado = nombreDueno.trim().toLowerCase();
+
+    return this.mascotasSubject.value.find(
+      mascota =>
+        mascota.nombre.trim().toLowerCase() === mascotaNormalizada &&
+        mascota.dueno.email.trim().toLowerCase() === emailNormalizado &&
+        mascota.dueno.nombreCompleto.trim().toLowerCase() === duenoNormalizado,
+    );
+  }
+
+  private normalizeCita(cita: Cita): Cita {
+    return {
+      ...cita,
+      tipoServicio: cita.tipoServicio ?? 'Consulta general',
+      veterinario: cita.veterinario ?? 'Profesional asignado',
+      telefonoContacto: cita.telefonoContacto ?? '',
+      emailContacto: cita.emailContacto ?? '',
+      notas: cita.notas ?? '',
+    };
   }
 }

@@ -1,63 +1,162 @@
-<section class="d-grid gap-4">
-  <header>
-    <h2 class="h4 fw-bold mb-1">Agenda de citas</h2>
-    <p class="text-muted mb-0">
-      Selecciona un horario disponible, agenda la consulta y da seguimiento al estado de atencion.
-    </p>
+<section class="appointments-page">
+  <header class="page-hero">
+    <div>
+      <span class="section-label">Reserva inteligente</span>
+      <h2>Programa una cita con fecha, horario, veterinario y datos de contacto completos.</h2>
+      <p>
+        Elige la mascota, selecciona el servicio, define la hora disponible y deja registrada la
+        informacion necesaria para una atencion organizada.
+      </p>
+    </div>
+
+    <div class="hero-summary">
+      <div class="summary-chip">
+        <strong>{{ disponibilidadHoy.length }}</strong>
+        <span>horarios libres en la fecha elegida</span>
+      </div>
+      <div class="summary-chip">
+        <strong>{{ citasDelDia.length }}</strong>
+        <span>citas registradas ese dia</span>
+      </div>
+    </div>
   </header>
 
-  <article class="card shadow-sm border-0">
-    <div class="card-body">
-      <form [formGroup]="citaForm" (ngSubmit)="registrarCita()" novalidate>
-        <div class="row g-3">
-          <div class="col-12 col-lg-4">
-            <label for="mascotaId" class="form-label">Mascota</label>
-            <select id="mascotaId" class="form-select" formControlName="mascotaId">
-              <option value="">Selecciona</option>
-              <option *ngFor="let mascota of mascotas" [value]="mascota.id">
-                {{ mascota.nombre }} - {{ mascota.dueno.nombreCompleto }}
-              </option>
-            </select>
-            <small class="text-danger" *ngIf="citaForm.controls.mascotaId.touched && citaForm.controls.mascotaId.invalid">
-              Debes elegir una mascota.
-            </small>
-          </div>
-
-          <div class="col-6 col-lg-3">
-            <label for="fecha" class="form-label">Fecha</label>
-            <input id="fecha" type="date" class="form-control" formControlName="fecha" />
-          </div>
-
-          <div class="col-6 col-lg-2">
-            <label for="hora" class="form-label">Hora</label>
-            <select id="hora" class="form-select" formControlName="hora">
-              <option value="">Selecciona</option>
-              <option *ngFor="let slot of disponibilidadHoy" [value]="slot">{{ slot }}</option>
-            </select>
-          </div>
-
-          <div class="col-12 col-lg-3">
-            <label for="motivo" class="form-label">Motivo</label>
-            <input id="motivo" class="form-control" formControlName="motivo" placeholder="Vacuna, control, etc." />
-            <small class="text-danger" *ngIf="citaForm.controls.motivo.touched && citaForm.controls.motivo.invalid">
-              Minimo 5 caracteres.
-            </small>
-          </div>
+  <div class="booking-layout">
+    <article class="card shadow-sm border-0 booking-card">
+      <div class="card-body p-4">
+        <div class="card-intro">
+          <h3>Nueva cita</h3>
+          <p>Completa la reserva con el profesional, el servicio y el contacto del tutor.</p>
         </div>
 
-        <div class="d-flex justify-content-end mt-4">
-          <button type="submit" class="btn btn-primary">Agendar cita</button>
-        </div>
-      </form>
+        <form [formGroup]="citaForm" (ngSubmit)="registrarCita()" novalidate>
+          <div class="row g-3">
+            <div class="col-12">
+              <label for="mascotaId" class="form-label">Mascota</label>
+              <select id="mascotaId" class="form-select" formControlName="mascotaId">
+                <option value="">Selecciona una mascota</option>
+                <option *ngFor="let mascota of mascotas" [value]="mascota.id">
+                  {{ mascota.nombre }} · {{ mascota.especie }} · {{ mascota.dueno.nombreCompleto }}
+                </option>
+              </select>
+              <small class="text-danger" *ngIf="citaForm.controls.mascotaId.touched && citaForm.controls.mascotaId.invalid">
+                Debes elegir una mascota registrada.
+              </small>
+            </div>
 
-      <div class="alert alert-success py-2 mt-3 mb-0" *ngIf="successMessage">{{ successMessage }}</div>
-      <div class="alert alert-danger py-2 mt-3 mb-0" *ngIf="errorMessage">{{ errorMessage }}</div>
-    </div>
-  </article>
+            <div class="col-12 col-md-4">
+              <label for="fecha" class="form-label">Fecha</label>
+              <input id="fecha" type="date" class="form-control" formControlName="fecha" />
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="hora" class="form-label">Horario</label>
+              <select id="hora" class="form-select" formControlName="hora">
+                <option value="">Selecciona un horario</option>
+                <option *ngFor="let slot of disponibilidadHoy" [value]="slot">{{ slot }}</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="veterinario" class="form-label">Veterinario</label>
+              <select id="veterinario" class="form-select" formControlName="veterinario">
+                <option value="">Selecciona un profesional</option>
+                <option *ngFor="let veterinario of veterinarios" [value]="veterinario">{{ veterinario }}</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="tipoServicio" class="form-label">Tipo de servicio</label>
+              <select id="tipoServicio" class="form-select" formControlName="tipoServicio">
+                <option value="">Selecciona un servicio</option>
+                <option *ngFor="let servicio of tiposServicio" [value]="servicio">{{ servicio }}</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="motivo" class="form-label">Motivo de consulta</label>
+              <input
+                id="motivo"
+                class="form-control"
+                formControlName="motivo"
+                placeholder="Control general, vacuna, molestia digestiva..."
+              />
+              <small class="text-danger" *ngIf="citaForm.controls.motivo.touched && citaForm.controls.motivo.invalid">
+                Escribe al menos 5 caracteres.
+              </small>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="telefonoContacto" class="form-label">Telefono de contacto</label>
+              <input
+                id="telefonoContacto"
+                class="form-control"
+                formControlName="telefonoContacto"
+                placeholder="999 999 999"
+              />
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="emailContacto" class="form-label">Correo electronico</label>
+              <input
+                id="emailContacto"
+                class="form-control"
+                formControlName="emailContacto"
+                placeholder="tutor@correo.com"
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="notas" class="form-label">Notas adicionales</label>
+              <textarea
+                id="notas"
+                rows="3"
+                class="form-control"
+                formControlName="notas"
+                placeholder="Sintomas observados, medicamentos previos o indicaciones especiales"
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Confirmar cita</button>
+          </div>
+        </form>
+
+        <div class="alert alert-success py-2 mt-3 mb-0" *ngIf="successMessage">{{ successMessage }}</div>
+        <div class="alert alert-danger py-2 mt-3 mb-0" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </div>
+    </article>
+
+    <aside class="booking-sidebar">
+      <article class="sidebar-card">
+        <span class="section-label">Resumen rapido</span>
+        <h3>{{ mascotaSeleccionada?.nombre || 'Selecciona una mascota' }}</h3>
+        <p *ngIf="mascotaSeleccionada; else noMascota">
+          {{ mascotaSeleccionada.especie }} · Tutor: {{ mascotaSeleccionada.dueno.nombreCompleto }}
+        </p>
+        <ng-template #noMascota>
+          <p>Selecciona un paciente para autocompletar el contacto del tutor y acelerar la reserva.</p>
+        </ng-template>
+      </article>
+
+      <article class="sidebar-card accent-card">
+        <h3>Disponibilidad visible</h3>
+        <p>
+          Puedes cambiar la fecha en cualquier momento. El sistema muestra solo horarios realmente
+          libres para evitar conflictos.
+        </p>
+      </article>
+    </aside>
+  </div>
 
   <article class="card shadow-sm border-0">
-    <div class="card-body">
-      <h3 class="h5 fw-semibold mb-3">Calendario de disponibilidad (14 dias)</h3>
+    <div class="card-body p-4">
+      <div class="section-heading">
+        <h3>Calendario de disponibilidad</h3>
+        <p>Consulta los proximos 14 dias y toca una fecha para actualizar el formulario.</p>
+      </div>
+
       <div class="calendar-grid">
         <button
           type="button"
@@ -75,20 +174,25 @@
   </article>
 
   <article class="card shadow-sm border-0">
-    <div class="card-body">
-      <h3 class="h5 fw-semibold mb-3">Citas del dia seleccionado</h3>
+    <div class="card-body p-4">
+      <div class="section-heading">
+        <h3>Citas del dia seleccionado</h3>
+        <p>Supervisa el estado de cada reserva y gestiona la atencion desde la misma vista.</p>
+      </div>
 
       <div *ngIf="citasDelDia.length === 0" class="empty-state">
         No hay citas para esta fecha.
       </div>
 
       <div class="table-responsive" *ngIf="citasDelDia.length > 0">
-        <table class="table align-middle mb-0">
+        <table class="table align-middle mb-0 appointment-table">
           <thead>
             <tr>
               <th>Hora</th>
-              <th>Mascota</th>
-              <th>Motivo</th>
+              <th>Paciente</th>
+              <th>Servicio</th>
+              <th>Veterinario</th>
+              <th>Contacto</th>
               <th>Estado</th>
               <th>Acciones</th>
             </tr>
@@ -96,8 +200,19 @@
           <tbody>
             <tr *ngFor="let cita of citasDelDia" [appResaltarProximaCita]="cita">
               <td>{{ cita.fechaHora | date: 'shortTime' }}</td>
-              <td>{{ cita.nombreMascota }}</td>
-              <td>{{ cita.motivo }}</td>
+              <td>
+                <div class="fw-semibold">{{ cita.nombreMascota }}</div>
+                <div class="small text-muted">{{ cita.nombreTutor }}</div>
+              </td>
+              <td>
+                <div class="fw-semibold">{{ cita.tipoServicio }}</div>
+                <div class="small text-muted">{{ cita.motivo }}</div>
+              </td>
+              <td>{{ cita.veterinario }}</td>
+              <td>
+                <div>{{ cita.telefonoContacto }}</div>
+                <div class="small text-muted">{{ cita.emailContacto }}</div>
+              </td>
               <td>{{ cita.estado | estadoCita }}</td>
               <td>
                 <div class="d-flex gap-2 flex-wrap">

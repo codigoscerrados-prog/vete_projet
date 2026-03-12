@@ -1,0 +1,88 @@
+<section class="home-page">
+  <article class="hero-panel">
+    <div class="hero-copy">
+      <span class="eyebrow">Centro veterinario digital</span>
+      <h2>Cuidamos cada visita con una agenda clara, seguimiento clinico y una experiencia mas humana.</h2>
+      <p>
+        Gestiona mascotas, coordina consultas y manten a cada tutor informado desde una portada pensada
+        para una veterinaria moderna.
+      </p>
+
+      <div class="hero-actions">
+        <a routerLink="/panel/citas" class="btn btn-primary btn-lg">Programar cita</a>
+        <a routerLink="/panel/mascotas" class="btn btn-outline-light btn-lg">Registrar mascota</a>
+      </div>
+
+      <div class="hero-benefits">
+        <div class="benefit-chip" *ngFor="let beneficio of beneficios">{{ beneficio }}</div>
+      </div>
+    </div>
+
+    <div class="hero-side">
+      <div class="metric-card accent">
+        <span>Agenda de hoy</span>
+        <strong>{{ espaciosDisponiblesHoy }}</strong>
+        <small>horarios disponibles para nuevas reservas</small>
+      </div>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <span>Mascotas activas</span>
+          <strong>{{ totalMascotas }}</strong>
+        </div>
+        <div class="metric-card">
+          <span>Citas en curso</span>
+          <strong>{{ citasPendientes }}</strong>
+        </div>
+      </div>
+
+      <div class="next-appointment" *ngIf="proximaCita; else emptyAppointment">
+        <span class="section-label">Proxima atencion</span>
+        <h3>{{ proximaCita.mascota }}</h3>
+        <p>{{ proximaCita.servicio }} con {{ proximaCita.veterinario }}</p>
+        <div class="appointment-meta">
+          <span>{{ proximaCita.fechaHora | date: 'fullDate' }}</span>
+          <span>{{ proximaCita.fechaHora | date: 'shortTime' }}</span>
+          <span>Tutor: {{ proximaCita.tutor }}</span>
+        </div>
+      </div>
+
+      <ng-template #emptyAppointment>
+        <div class="next-appointment empty">
+          <span class="section-label">Proxima atencion</span>
+          <h3>Sin citas registradas</h3>
+          <p>Usa el modulo de citas para reservar la primera consulta del dia.</p>
+        </div>
+      </ng-template>
+    </div>
+  </article>
+
+  <section class="content-grid">
+    <article class="info-card">
+      <div class="card-heading">
+        <span class="section-label">Servicios destacados</span>
+        <h3>Todo lo necesario para una veterinaria actual</h3>
+      </div>
+
+      <div class="service-list">
+        <div class="service-card" *ngFor="let servicio of servicios">
+          <h4>{{ servicio.nombre }}</h4>
+          <p>{{ servicio.descripcion }}</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="info-card dark-card">
+      <div class="card-heading">
+        <span class="section-label">Equipo clinico</span>
+        <h3>Especialistas listos para acompanar cada caso</h3>
+      </div>
+
+      <div class="specialist-list">
+        <div class="specialist-item" *ngFor="let especialista of especialistas">{{ especialista }}</div>
+      </div>
+
+      <a routerLink="/panel/historial" class="btn btn-light mt-4 align-self-start">Ver historial medico</a>
+    </article>
+  </section>
+</section>

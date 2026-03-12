@@ -7,7 +7,7 @@ export const guestGuard: CanMatchFn = () => {
   const router = inject(Router);
 
   if (authService.isLoggedIn()) {
-    return router.createUrlTree(['/']);
+    return router.createUrlTree(['/panel']);
   }
 
   return true;

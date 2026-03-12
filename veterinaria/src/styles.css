@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@400;500;700;800&display=swap');
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css');
 
 :root {
   --vet-primary: #0ea5e9;
+  --vet-primary-dark: #0f766e;
+  --vet-accent: #f59e0b;
   --vet-surface: #ffffff;
   --vet-text: #0f172a;
 }
@@ -13,11 +16,22 @@
 body {
   margin: 0;
   color: var(--vet-text);
-  font-family:
-    'Segoe UI',
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
   background-color: #f8fafc;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--vet-primary-dark);
+  --bs-btn-border-color: var(--vet-primary-dark);
+  --bs-btn-hover-bg: #115e59;
+  --bs-btn-hover-border-color: #115e59;
+  --bs-btn-active-bg: #134e4a;
+  --bs-btn-active-border-color: #134e4a;
 }

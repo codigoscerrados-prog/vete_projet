@@ -1,15 +1,33 @@
 .shell-root {
   min-height: 100vh;
-  background: linear-gradient(140deg, #fff7ed 0%, #f8fafc 50%, #eef2ff 100%);
+  background:
+    radial-gradient(circle at top, rgb(14 165 233 / 0.08), transparent 28%),
+    linear-gradient(140deg, #fefce8 0%, #f8fafc 50%, #eff6ff 100%);
 }
 
 .shell-header {
-  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgb(255 255 255 / 0.88);
+  backdrop-filter: blur(18px);
   border-bottom: 1px solid #e5e7eb;
+}
+
+.brand-kicker {
+  display: inline-block;
+  margin-bottom: 0.35rem;
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .nav-pill {
   border-radius: 999px;
+  padding-inline: 1rem;
+  border-color: #e2e8f0;
 }
 
 .active-link {

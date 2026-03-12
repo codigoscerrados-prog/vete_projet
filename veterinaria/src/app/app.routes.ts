@@ -5,15 +5,24 @@ import { ShellComponent } from './layout/shell.component';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadChildren: () => import('./features/public/public.module').then(m => m.PublicModule),
+  },
+  {
     path: 'auth',
     canMatch: [guestGuard],
     loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: '',
+    path: 'panel',
     component: ShellComponent,
     canActivate: [authGuard],
     children: [
+      {
+        path: 'inicio',
+        loadChildren: () =>
+          import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
+      },
       {
         path: 'mascotas',
         loadChildren: () =>
@@ -28,7 +37,7 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/historial/historial.module').then(m => m.HistorialModule),
       },
-      { path: '', pathMatch: 'full', redirectTo: 'mascotas' },
+      { path: '', pathMatch: 'full', redirectTo: 'inicio' },
     ],
   },
   { path: '**', redirectTo: '' },

@@ -5,6 +5,11 @@ export interface Cita {
   mascotaId: string;
   fechaHora: string;
   motivo: string;
+  tipoServicio: string;
+  veterinario: string;
+  telefonoContacto: string;
+  emailContacto: string;
+  notas: string;
   estado: EstadoCita;
   resumenAtencion: string;
   createdAt: string;
@@ -14,6 +19,11 @@ export interface CitaDraft {
   mascotaId: string;
   fechaHora: string;
   motivo: string;
+  tipoServicio: string;
+  veterinario: string;
+  telefonoContacto: string;
+  emailContacto: string;
+  notas: string;
 }
 
 export interface DayAvailability {
