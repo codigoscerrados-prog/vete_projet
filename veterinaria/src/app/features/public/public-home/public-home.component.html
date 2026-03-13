@@ -126,18 +126,28 @@
                   </div>
 
                   <div class="col-12 col-md-6">
+                    <label class="form-label" for="raza">Raza</label>
+                    <input id="raza" class="form-control" formControlName="raza" />
+                  </div>
+
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="fechaNacimiento">Fecha de nacimiento</label>
+                    <input id="fechaNacimiento" type="date" class="form-control" formControlName="fechaNacimiento" />
+                  </div>
+
+                  <div class="col-12 col-md-6">
                     <label class="form-label" for="nombreDueno">Nombre del tutor</label>
                     <input id="nombreDueno" class="form-control" formControlName="nombreDueno" />
                   </div>
 
                   <div class="col-12 col-md-3">
                     <label class="form-label" for="telefonoDueno">Telefono</label>
-                    <input id="telefonoDueno" class="form-control" formControlName="telefonoDueno" />
+                    <input id="telefonoDueno" type="tel" class="form-control" formControlName="telefonoDueno" />
                   </div>
 
                   <div class="col-12 col-md-3">
                     <label class="form-label" for="emailDueno">Correo</label>
-                    <input id="emailDueno" class="form-control" formControlName="emailDueno" />
+                    <input id="emailDueno" type="email" class="form-control" formControlName="emailDueno" />
                   </div>
 
                   <div class="col-12 col-md-4">
@@ -172,6 +182,11 @@
                   <div class="col-12 col-md-6">
                     <label class="form-label" for="motivo">Motivo</label>
                     <input id="motivo" class="form-control" formControlName="motivo" />
+                  </div>
+
+                  <div class="col-12">
+                    <label class="form-label" for="notas">Notas adicionales</label>
+                    <textarea id="notas" rows="3" class="form-control" formControlName="notas"></textarea>
                   </div>
                 </div>
 
