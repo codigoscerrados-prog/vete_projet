@@ -118,16 +118,44 @@ export class AgendaCitasComponent {
   }
 
   confirmarCita(citaId: string): void {
-    this.store.actualizarEstadoCita(citaId, 'confirmada');
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    const actualizado = this.store.actualizarEstadoCita(citaId, 'confirmada');
+    if (!actualizado) {
+      this.errorMessage = 'No se pudo confirmar la cita seleccionada.';
+      return;
+    }
+
+    this.successMessage = 'La cita fue confirmada correctamente.';
   }
 
   cancelarCita(citaId: string): void {
-    this.store.actualizarEstadoCita(citaId, 'cancelada');
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    const actualizado = this.store.actualizarEstadoCita(citaId, 'cancelada');
+    if (!actualizado) {
+      this.errorMessage = 'No se pudo cancelar la cita seleccionada.';
+      return;
+    }
+
+    this.successMessage = 'La cita fue cancelada correctamente.';
   }
 
   completarCita(citaId: string): void {
-    const resumen = prompt('Resumen breve de atencion:') ?? '';
-    this.store.actualizarEstadoCita(citaId, 'completada', resumen);
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    const resumen = globalThis.prompt?.('Resumen breve de atencion:') ?? '';
+    const actualizado = this.store.actualizarEstadoCita(citaId, 'completada', resumen);
+
+    if (!actualizado) {
+      this.errorMessage = 'No se pudo completar la cita seleccionada.';
+      return;
+    }
+
+    this.successMessage = 'La cita fue marcada como completada.';
   }
 
   obtenerNombreMascota(mascotaId: string): string {

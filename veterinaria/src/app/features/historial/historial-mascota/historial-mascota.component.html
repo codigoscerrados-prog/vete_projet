@@ -2,7 +2,7 @@
   <header>
     <h2 class="h4 fw-bold mb-1">Historial de atencion por mascota</h2>
     <p class="text-muted mb-0">
-      Consulta citas previas, estado del tratamiento y resumenes clinicos por paciente.
+      Consulta todos los servicios registrados, con opcion de filtrar por mascota cuando lo necesites.
     </p>
   </header>
 
@@ -11,19 +11,19 @@
       <form [formGroup]="filtroForm">
         <div class="row g-3 align-items-end">
           <div class="col-12 col-md-8">
-            <label for="mascotaHistorial" class="form-label">Selecciona una mascota</label>
+            <label for="mascotaHistorial" class="form-label">Filtrar por mascota</label>
             <select id="mascotaHistorial" class="form-select" formControlName="mascotaId">
-              <option value="">Selecciona</option>
+              <option value="">Todas las mascotas</option>
               <option *ngFor="let mascota of mascotas" [value]="mascota.id">
                 {{ mascota.nombre }} - {{ mascota.dueno.nombreCompleto }}
               </option>
             </select>
           </div>
 
-          <div class="col-12 col-md-4" *ngIf="mascotaSeleccionada">
+          <div class="col-12 col-md-4">
             <div class="summary-box">
-              <div class="small text-muted">Atenciones completadas</div>
-              <div class="h4 mb-0">{{ atencionesCompletadas }}</div>
+              <div class="small text-muted">Servicios visibles</div>
+              <div class="h4 mb-0">{{ totalServicios }}</div>
             </div>
           </div>
         </div>
@@ -31,17 +31,24 @@
     </div>
   </article>
 
-  <article class="card shadow-sm border-0" *ngIf="mascotaSeleccionada">
+  <article class="card shadow-sm border-0">
     <div class="card-body">
-      <h3 class="h5 fw-semibold mb-3">
+      <h3 class="h5 fw-semibold mb-3" *ngIf="mascotaSeleccionada; else tituloGeneral">
         {{ mascotaSeleccionada.nombre }} ({{ mascotaSeleccionada.especie }}) - {{ mascotaSeleccionada.raza }}
       </h3>
-      <p class="small text-muted mb-4">
+      <ng-template #tituloGeneral>
+        <h3 class="h5 fw-semibold mb-3">Todos los servicios registrados</h3>
+      </ng-template>
+
+      <p class="small text-muted mb-4" *ngIf="mascotaSeleccionada">
         Dueno: {{ mascotaSeleccionada.dueno.nombreCompleto }} | Telefono: {{ mascotaSeleccionada.dueno.telefono }}
+      </p>
+      <p class="small text-muted mb-4" *ngIf="!mascotaSeleccionada">
+        Atenciones completadas: {{ atencionesCompletadas }}
       </p>
 
       <div *ngIf="historial.length === 0" class="empty-state">
-        Esta mascota aun no tiene citas registradas.
+        No hay servicios registrados para el filtro actual.
       </div>
 
       <div class="history-list" *ngIf="historial.length > 0">
@@ -49,10 +56,17 @@
           <div class="d-flex flex-wrap justify-content-between align-items-start gap-2">
             <div>
               <div class="fw-semibold">{{ cita.fechaHora | date: 'fullDate' }} - {{ cita.fechaHora | date: 'shortTime' }}</div>
+              <div class="text-muted">{{ cita.nombreMascota }} | {{ cita.especieMascota }} | Tutor: {{ cita.nombreDueno }}</div>
+              <div class="text-muted">Servicio: {{ cita.tipoServicio }}</div>
               <div class="text-muted">Motivo: {{ cita.motivo }}</div>
+              <div class="text-muted">Veterinario: {{ cita.veterinario }}</div>
             </div>
             <span class="badge rounded-pill text-bg-secondary">{{ cita.estado | estadoCita }}</span>
           </div>
+
+          <p class="mb-0 mt-3" *ngIf="cita.notas">
+            <strong>Notas:</strong> {{ cita.notas }}
+          </p>
 
           <p class="mb-0 mt-3" *ngIf="cita.resumenAtencion">
             <strong>Resumen de atencion:</strong> {{ cita.resumenAtencion }}
